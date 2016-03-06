@@ -11,7 +11,6 @@ public class IdInforDaoIpmMysql implements IdInforDao{
 	private Applications applications;
 
 	private ProductInformation pInformation;
-	
 	public void addApplication() {
 		// TODO Auto-generated method stub
 		System.out.println(this.pInformation);
