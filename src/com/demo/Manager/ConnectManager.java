@@ -39,7 +39,7 @@ public class ConnectManager {
 		JavascriptExecutor js = (JavascriptExecutor) webDriver;
 		js.executeScript("document.getElementById('ddlTipologia').style.display='list-item';");
 		js.executeScript("document.getElementById('TipologiaMobile').style.display='list-item';");
-		
+		//js.executeScript("document.getElementById('ddlMarca').style.display='list-item';");
 
 		/*
 		 * WebElement webElement = webDriver.findElement(By.xpath
@@ -74,7 +74,7 @@ public class ConnectManager {
 
 		By by = By.xpath("//select[@id='ddlTipologia']");
 
-		selectOptionLevel1(webDriver, by, 1);
+		selectOptionLevel1( by, 1);
 
 	}
 
@@ -105,10 +105,11 @@ public class ConnectManager {
 		webDriver.close();
 	}
 
-	private void selectOptionLevel1(WebDriver webDriver, By by, int index) {
+	private void selectOptionLevel1(By by, int index) {
 		int i = 0;
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) webDriver;
+			//js.executeScript("document.getElementById('ddlTipologia').style.display='list-item';");
 			js.executeScript("document.getElementById('ddlMarca').style.display='list-item';");
 			WebElement webElement = webDriver.findElement(by);
 			if (index == 1)
@@ -118,33 +119,39 @@ public class ConnectManager {
 			List<WebElement> listweb = selectType.getOptions();
 
 			for (i = index; i < listweb.size(); i++) {
-
-				listweb.get(i).click();
+				//js.executeScript("document.getElementById('ddlTipologia').style.display='list-item';");
+				WebElement ee = listweb.get(i);
+				WebDriverWait wait = new WebDriverWait(webDriver, 10);wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ddlTipologia")));
+				ee.click();
+				
+				//js.executeScript("document.getElementById('ddlMarca').style.display='list-item';");
 				new WebDriverWait(webDriver, 15)
 						.until(ExpectedConditions.presenceOfElementLocated(By
 								.xpath("//select[@id='ddlMarca']/option[@value='0']")));
 
-				By byL1 = By.xpath("//select[@id='ddlMarca']");
+				By byL2 = By.xpath("//select[@id='ddlMarca']");
 
-				selectOptionLevel2(webDriver, byL1, 1);
+				
 
-				/*
-				 * WebElement e = webDriver.findElement(By
-				 * .xpath("//select[@id='ddlMarca']")); System.out.println(i +
-				 * e.getAttribute("outerHTML"));
-				 */
+				
+				  WebElement e = webDriver.findElement(By
+				  .xpath("//select[@id='ddlMarca']")); System.out.println("ddlMarca"+i +
+				  e.getAttribute("outerHTML"));
+				  
+				  selectOptionLevel2( byL2, 1);
 
 			}
 		} catch (StaleElementReferenceException e) {
-			selectOptionLevel1(webDriver, by, i);
+			selectOptionLevel1(by, i);
 		}
 	}
 
-	private void selectOptionLevel2(WebDriver webDriver, By by, int index) {
+	private void selectOptionLevel2( By by, int index) {
 		
 		int i = 0;
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) webDriver;
+			//js.executeScript("document.getElementById('ddlMarca').style.display='list-item';");
 			js.executeScript("document.getElementById('ddlGamma').style.display='list-item';");
 			WebElement webElement = webDriver.findElement(by);
 			if (index == 1)
@@ -153,20 +160,142 @@ public class ConnectManager {
 			List<WebElement> listweb = selectType.getOptions();
 			
 			for (i = index; i < listweb.size(); i++) {
-
-				listweb.get(i).click();
+				//js.executeScript("document.getElementById('ddlMarca').style.display='list-item';");
+				
+				WebElement ee = listweb.get(i);
+				WebDriverWait wait = new WebDriverWait(webDriver, 10);wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ddlMarca")));
+				ee.click();
+				//js.executeScript("document.getElementById('ddlGamma').style.display='list-item';");
 				new WebDriverWait(webDriver, 15)
 						.until(ExpectedConditions.presenceOfElementLocated(By
 								.xpath("//select[@id='ddlGamma']/option[@value='0']")));
 
+				By byL3 = By.xpath("//select[@id='ddlGamma']");
+
+				
 				WebElement e = webDriver.findElement(By
 						.xpath("//select[@id='ddlGamma']"));
-				System.out.println(i + e.getAttribute("outerHTML"));
+				System.out.println("ddlGamma"+i + e.getAttribute("outerHTML"));
+				
+				selectOptionLevel3( byL3, 1);
+			}
+		} catch (StaleElementReferenceException e) {
+			selectOptionLevel2( by, i);
+		}
+
+	}
+	
+	private void selectOptionLevel3( By by, int index){
+		
+		
+		int i = 0;
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) webDriver;
+			//js.executeScript("document.getElementById('ddlGamma').style.display='list-item';");
+			js.executeScript("document.getElementById('ddlModello').style.display='list-item';");
+			WebElement webElement = webDriver.findElement(by);
+			if (index == 1)
+				System.out.println(webElement.getAttribute("outerHTML"));
+			Select selectType = new Select(webElement);
+			List<WebElement> listweb = selectType.getOptions();
+			
+			for (i = index; i < listweb.size(); i++) {
+				//js.executeScript("document.getElementById('ddlGamma').style.display='list-item';");
+				WebElement ee = listweb.get(i);
+				WebDriverWait wait = new WebDriverWait(webDriver, 10);wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ddlGamma")));
+				ee.click();
+				//js.executeScript("document.getElementById('ddlModello').style.display='list-item';");
+				new WebDriverWait(webDriver, 15)
+						.until(ExpectedConditions.presenceOfElementLocated(By
+								.xpath("//select[@id='ddlModello']/option[@value='0']")));
+
+				By byL4 = By.xpath("//select[@id='ddlModello']");
+
+				
+				WebElement e = webDriver.findElement(By
+						.xpath("//select[@id='ddlModello']"));
+				System.out.println("ddlModello"+i + e.getAttribute("outerHTML"));
+				selectOptionLevel4( byL4, 1);
 
 			}
 		} catch (StaleElementReferenceException e) {
-			selectOptionLevel2(webDriver, by, i);
+			selectOptionLevel3( by, i);
 		}
 
+	}
+	
+	private void selectOptionLevel4( By by, int index){
+		
+		int i = 0;
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) webDriver;
+			//js.executeScript("document.getElementById('ddlModello').style.display='list-item';");
+			//js.executeScript("document.getElementById('ddlModello').style.display='list-item';");
+			js.executeScript("document.getElementById('ddlVersione').style.display='list-item';");
+			WebElement webElement = webDriver.findElement(by);
+			if (index == 1)
+				System.out.println(webElement.getAttribute("outerHTML"));
+			Select selectType = new Select(webElement);
+			List<WebElement> listweb = selectType.getOptions();
+			
+			for (i = index; i < listweb.size(); i++) {
+				//js.executeScript("document.getElementById('ddlModello').style.display='list-item';");
+				
+				WebElement ee = listweb.get(i);
+				WebDriverWait wait = new WebDriverWait(webDriver, 10);wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ddlModello")));
+				ee.click();
+				//js.executeScript("document.getElementById('ddlVersione').style.display='list-item';");
+				new WebDriverWait(webDriver, 15)
+						.until(ExpectedConditions.presenceOfElementLocated(By
+								.xpath("//select[@id='ddlVersione']/option[@value='0']")));
+
+				By byL5 = By.xpath("//select[@id='ddlVersione']");
+
+				
+				WebElement e = webDriver.findElement(By
+						.xpath("//select[@id='ddlVersione']"));
+				System.out.println("ddlVersione"+i + e.getAttribute("outerHTML"));
+				selectOptionLevel5(byL5, 1);
+			}
+		} catch (StaleElementReferenceException e) {
+			selectOptionLevel4( by, i);
+		}
+	}
+	
+	private void selectOptionLevel5( By by, int index){
+		//ddlMotore_chosen
+		int i = 0;
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) webDriver;
+			//js.executeScript("document.getElementById('ddlModello').style.display='list-item';");
+			//js.executeScript("document.getElementById('ddlModello').style.display='list-item';");
+			js.executeScript("document.getElementById('ddlMotore').style.display='list-item';");
+			WebElement webElement = webDriver.findElement(by);
+			if (index == 1)
+				System.out.println(webElement.getAttribute("outerHTML"));
+			Select selectType = new Select(webElement);
+			List<WebElement> listweb = selectType.getOptions();
+			
+			for (i = index; i < listweb.size(); i++) {
+				//js.executeScript("document.getElementById('ddlVersione').style.display='list-item';");
+				WebElement ee = listweb.get(i);
+				WebDriverWait wait = new WebDriverWait(webDriver, 10);wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ddlVersione")));
+				ee.click();
+				//js.executeScript("document.getElementById('ddlMotore').style.display='list-item';");
+				new WebDriverWait(webDriver, 15)
+						.until(ExpectedConditions.presenceOfElementLocated(By
+								.xpath("//select[@id='ddlMotore']/option[@value='0']")));
+
+				//By byL5 = By.xpath("//select[@id='ddlVersione']");
+
+				
+				WebElement e = webDriver.findElement(By
+						.xpath("//select[@id='ddlMotore']"));
+				System.out.println(i + e.getAttribute("outerHTML"));
+				//selectOptionLevel5(byL5, 1);
+			}
+		} catch (StaleElementReferenceException e) {
+			selectOptionLevel5( by, i);
+		}
 	}
 }
