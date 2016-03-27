@@ -1,6 +1,7 @@
 package com.demo.bean.bytype;
 
 public class ProductType {
+	
 	private String type; //类型
 	private String brand;
 	private String form;

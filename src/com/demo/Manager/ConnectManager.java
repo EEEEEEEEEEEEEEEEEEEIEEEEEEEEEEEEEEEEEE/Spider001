@@ -23,7 +23,7 @@ public class ConnectManager {
 
 	private ProductInfor productInfor;
 	private WebDriver webDriver;
-
+	private TypeInforSend getProductInfor;
 	private int waittime = 600;
 
 	// private WebElement webEle;
@@ -34,10 +34,11 @@ public class ConnectManager {
 				"E:/work/chromedriver.exe");
 
 		webDriver = new ChromeDriver();
+		
 	}
 
 	public void getWebeleByType() {
-		TypeInforSend inforSend = new TypeInforSend();
+		//TypeInforSend inforSend = new TypeInforSend();
 
 		webDriver
 				.get("http://web.daycogarage.com/catalogue/zh-cn/search-model?a=1&t=1");
@@ -106,7 +107,7 @@ public class ConnectManager {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By
 						.id("ddlTipologia")));
 				//System.out.println(ee.getText());
-				productInfor.getProductType().setType(ee.getText());
+				//productInfor.getProductType().setType(ee.getText());
 				ee.click();
 
 				// js.executeScript("document.getElementById('ddlMarca').style.display='list-item';");
@@ -150,7 +151,7 @@ public class ConnectManager {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By
 						.id("ddlMarca")));
 				//System.out.println(ee.getText());
-				productInfor.getProductType().setBrand(ee.getText());
+				//productInfor.getProductType().setBrand(ee.getText());
 				ee.click();
 				// js.executeScript("document.getElementById('ddlGamma').style.display='list-item';");
 				new WebDriverWait(webDriver, waittime)
@@ -193,7 +194,7 @@ public class ConnectManager {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By
 						.id("ddlGamma")));
 				//System.out.println(ee.getText());
-				productInfor.getProductType().setForm(ee.getText());
+				//productInfor.getProductType().setForm(ee.getText());
 				ee.click();
 				// js.executeScript("document.getElementById('ddlModello').style.display='list-item';");
 				new WebDriverWait(webDriver, waittime)
@@ -238,7 +239,7 @@ public class ConnectManager {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By
 						.id("ddlModello")));
 				//System.out.println(ee.getText());
-				productInfor.getProductType().setYear(ee.getText());
+				//productInfor.getProductType().setYear(ee.getText());
 				ee.click();
 				// js.executeScript("document.getElementById('ddlVersione').style.display='list-item';");
 				new WebDriverWait(webDriver, waittime)
@@ -280,7 +281,7 @@ public class ConnectManager {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By
 						.id("ddlVersione")));
 			//	System.out.println(ee.getText());
-				productInfor.getProductType().setVersion(ee.getText());
+				//productInfor.getProductType().setVersion(ee.getText());
 				ee.click();
 				// js.executeScript("document.getElementById('ddlMotore').style.display='list-item';");
 				new WebDriverWait(webDriver, waittime)
@@ -322,7 +323,7 @@ public class ConnectManager {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By
 						.id("ddlMotore")));
 			//	System.out.println(ee.getText());
-				productInfor.getProductType().setEngine(ee.getText());
+				//productInfor.getProductType().setEngine(ee.getText());
 				ee.click();
 				// js.executeScript("document.getElementById('VisibilitaRightSide').style.display='list-item';");
 				new WebDriverWait(webDriver, waittime).until(ExpectedConditions
@@ -331,8 +332,12 @@ public class ConnectManager {
 
 				WebElement e = webDriver.findElement(By
 						.xpath("//div[@id='VisibilitaRightSide']"));
-				System.out.println(productInfor.getProductType());
+				//System.out.println(productInfor.getProductType());
 				//System.out.println(i + e.getAttribute("outerHTML"));
+				getProductInfor = new TypeInforSend(productInfor);
+				getProductInfor.setProductInforElement(e);
+				getProductInfor.sendInfor();
+				
 			}
 		} catch (StaleElementReferenceException e) {
 			selectOptionLevel6(by, i);
