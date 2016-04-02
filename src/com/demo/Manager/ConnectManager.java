@@ -322,14 +322,13 @@ public class ConnectManager {
 				WebDriverWait wait = new WebDriverWait(webDriver, 10);
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By
 						.id("ddlMotore")));
-			//	System.out.println(ee.getText());
-				//productInfor.getProductType().setEngine(ee.getText());
 				ee.click();
+				js.executeScript("document.getElementsByClassName('greyLightTable').css('display','table');");
 				// js.executeScript("document.getElementById('VisibilitaRightSide').style.display='list-item';");
 				new WebDriverWait(webDriver, waittime).until(ExpectedConditions
 						.presenceOfElementLocated(By
 								.xpath("//div[@id='VisibilitaRightSide']")));
-
+				
 				WebElement e = webDriver.findElement(By
 						.xpath("//div[@id='VisibilitaRightSide']"));
 				//System.out.println(productInfor.getProductType());

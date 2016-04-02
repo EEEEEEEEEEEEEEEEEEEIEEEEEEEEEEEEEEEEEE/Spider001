@@ -2,6 +2,7 @@ package com.demo.Manager;
 
 import java.util.List;
 
+import org.junit.experimental.theories.FromDataPoints;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -40,8 +41,9 @@ public class TypeInforSend {
 
 		//System.out.println(productInforElement.findElement(By
 			//	.cssSelector("data-bind='text: selectedMotoreDetails()'")));
+		System.out.println(moreInfor.getAttribute("outerHTML"));
 		List<WebElement> listWebElements = moreInfor.findElements(By.xpath("//td[@*]"));//moreInfor.findElement(By.xpath("//td[@*]"));
-		
+		System.out.println(listWebElements.get(1).getText());
 		System.out.println(productInfor);
 	}
 }
